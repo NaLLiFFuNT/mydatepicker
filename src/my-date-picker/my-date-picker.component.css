@@ -181,6 +181,7 @@
 
 .mydp .header td:nth-child(1) {
     padding-left: 4px;
+    width: 20px;
 }
 
 .mydp .header td:nth-child(2) {
@@ -189,6 +190,8 @@
 
 .mydp .header td:nth-child(3) {
     padding-right: 4px;
+    width: 20px;
+    text-align: right;
 }
 
 .mydp .caltable {
