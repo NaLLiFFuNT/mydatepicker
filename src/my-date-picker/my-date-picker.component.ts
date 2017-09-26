@@ -685,7 +685,6 @@ export class MyDatePicker implements OnChanges, ControlValueAccessor {
     }
 
     onTemplateBtnClearClick(): void {
-        // Remove date button clicked
         this.clearDate();
         if (this.showSelector) {
             this.calendarToggle.emit(3);
@@ -694,7 +693,6 @@ export class MyDatePicker implements OnChanges, ControlValueAccessor {
     }
 
     onTemplateBtnSaveClick(): void {
-        // Remove date button clicked
         if (this.selectedDate.day) {
             this.updateDateValue(this.selectedDate, false);
         }
