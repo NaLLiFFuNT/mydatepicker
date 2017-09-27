@@ -39,5 +39,7 @@
             </tr>
             </tbody>
         </table>
+        <button *ngIf="opts.showSaveBtnOnPopup" [ngClass]="opts.saveBtnClassString" (click)="onTemplateBtnSaveClick($event)">{{opts.saveBtnCaption}}</button>
+        <button *ngIf="opts.showClearBtnOnPopup" [ngClass]="opts.clearBtnClassString" (click)="onTemplateBtnClearClick($event)">{{opts.clearBtnCaption}}</button>
     </div>
 </div>

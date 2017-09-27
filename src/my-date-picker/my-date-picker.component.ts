@@ -37,6 +37,8 @@ export class MyDatePicker implements OnChanges, ControlValueAccessor {
     @Output() calendarViewChanged: EventEmitter<IMyCalendarViewChanged> = new EventEmitter<IMyCalendarViewChanged>();
     @Output() calendarToggle: EventEmitter<number> = new EventEmitter<number>();
     @Output() inputFocusBlur: EventEmitter<IMyInputFocusBlur> = new EventEmitter<IMyInputFocusBlur>();
+    @Output() templateBtnSaveClick: EventEmitter<IMyDateModel> = new EventEmitter<IMyDateModel>();
+    @Output() templateBtnClearClick: EventEmitter<IMyDateModel> = new EventEmitter<IMyDateModel>();
 
     onChangeCb: (_: any) => void = () => { };
     onTouchedCb: () => void = () => { };
@@ -113,7 +115,13 @@ export class MyDatePicker implements OnChanges, ControlValueAccessor {
         ariaLabelPrevMonth: <string> "Previous Month",
         ariaLabelNextMonth: <string> "Next Month",
         ariaLabelPrevYear: <string> "Previous Year",
-        ariaLabelNextYear: <string> "Next Year"
+        ariaLabelNextYear: <string> "Next Year",
+        showSaveBtnOnPopup: <boolean> false,
+        showClearBtnOnPopup: <boolean> false,
+        saveBtnClassString: <string> "",
+        clearBtnClassString: <string> "",
+        saveBtnCaption: <string> "Save",
+        clearBtnCaption: <string> "Clear"
     };
 
     constructor(public elem: ElementRef, private renderer: Renderer, private cdr: ChangeDetectorRef, private localeService: LocaleService, private utilService: UtilService) {
@@ -674,5 +682,23 @@ export class MyDatePicker implements OnChanges, ControlValueAccessor {
         this.prevYearDisabled = y - 1 < this.opts.minYear || dpy;
         this.nextMonthDisabled = m === 12 && y === this.opts.maxYear || dnm;
         this.nextYearDisabled = y + 1 > this.opts.maxYear || dny;
+    }
+
+    onTemplateBtnClearClick(): void {
+        this.clearDate();
+        if (this.showSelector) {
+            this.calendarToggle.emit(3);
+        }
+        this.showSelector = false;
+    }
+
+    onTemplateBtnSaveClick(): void {
+        if (this.selectedDate.day) {
+            this.updateDateValue(this.selectedDate, false);
+        }
+        if (this.showSelector) {
+            this.calendarToggle.emit(3);
+        }
+        this.showSelector = false;
     }
 }
